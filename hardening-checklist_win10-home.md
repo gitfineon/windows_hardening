@@ -1,21 +1,23 @@
-Windows 10 Hardening
-====================
+# Windows 10 (Home) Hardening Checklist
 
-Bit Locker
-==========
+All of these points are recommendations, e.g. if you do not want to encrypt your partitions, no one forces you to enable Bit Locker for your private computer.
+
+## Disk Encryption
 - [ ] Enable Bit Locker
 
-Antivirus
-=========
+  *Disk encryption is recommended, especially for mobile devices*
+
+## Antivirus
 - [ ] Enable Windows Defender
 
-Group Policies
-==============
+  *There are a many providers of security suites, but Microsofts built-in solution (only) does a good job if no other security suite is in use!*
+
+## Group Policies
 
 [CIS Microsoft Windows 10 Enterprise RTM (Release 1507) Benchmark](https://benchmarks.cisecurity.org/tools2/windows/CIS_Microsoft_Windows_10_Enterprise_RTM_Release_1507_Benchmark_v1.0.0.pdf)
 
-Account Policies
-----------------
+### Account Policies
+
 - [ ] Set `Account lockout duration` to `15 or more minute(s)`
 
   Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout duration
@@ -28,9 +30,9 @@ Account Policies
 
   Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after
 
-Local Policies
---------------
-- [ ] Audit Policy
+### Local Policies
+
+- [ ] **Audit Policy**
   - [ ] Audit account logon events: Failure
   - [ ] Audit account management: Success, Failure
   - [ ] Audit directory service access : No auditing
@@ -42,12 +44,9 @@ Local Policies
   - [ ] Audit system events: Success Failure
 
 
-
-$lp = Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\
-__________________________________________________________________________________
+###### $lp = Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\
 
 - [ ] Set `Access this computer from the network` to `Administrators` 
-
 
   $lp\User Rights Assignment\Access this computer from the network
 
@@ -127,8 +126,8 @@ ________________________________________________________________________________
 
   $lp\Security Options\User Account Control: Admin Approval Mode for the Built-in Administrator account
 
-Windows Firewall With Advanced Security
----------------------------------------
+### Windows Firewall With Advanced Security
+
 - [ ] Set `Windows Firewall: Domain: Firewall state` to `On (recommended)`
 
   Computer Configuration\Policies\Windows Settings\Security Settings\Windows Firewall with Advanced Security\Windows Firewall with Advanced Security\Windows Firewall Properties\*\Firewall state
@@ -137,14 +136,13 @@ Windows Firewall With Advanced Security
 
   Computer Configuration\Policies\Windows Settings\Security Settings\Windows Firewall with Advanced Security\Windows Firewall with Advanced Security\Windows Firewall Properties\*\Inbound connections
 
-Control Panel
--------------
+### Control Panel
+
 - [ ] Set `Prevent enabling lock screen camera` to `Enabled`
 
   Computer Configuration\Policies\Administrative Templates\Control Panel\Personalization\Prevent enabling lock screen camera
 
-$adt_sys=Computer Configuration\Policies\Administrative Templates\System\
-_________________________________________________________________________
+###### $adt_sys=Computer Configuration\Policies\Administrative Templates\System\
 
 - [ ] Set `Turn off the Windows Messenger Customer Experience Improvement Program` to `Enabled`
 
@@ -204,7 +202,7 @@ _________________________________________________________________________
 
 - [ ] Set `Enable/Disable PerfTrack` to `Disabled`
 
-  $adt_sys\Troubleshooting and Diagnostics\Windows Performance PerfTrack\Enable/Disable PerfTrack
+###### $adt_sys\Troubleshooting and Diagnostics\Windows Performance PerfTrack\Enable/Disable PerfTrack
 
 - [ ] Set `Enable Windows NTP Client` to `Enabled` 
 
@@ -214,8 +212,7 @@ _________________________________________________________________________
 
   $adt_sys\Windows Time Service\Time Providers\Enable Windows NTP Server
 
-$adt_comp=Computer Configuration\Policies\Administrative Templates\Windows Components\
-______________________________________________________________________________________
+###### $adt_comp=Computer Configuration\Policies\Administrative Templates\Windows Components\
 
 - [ ] Set `Allow a Windows app to share application data between users` to `Disabled`
 
@@ -299,7 +296,7 @@ ________________________________________________________________________________
 
 - [ ] Set `System: Specify the maximum log file size (KB)` to `Enabled: 32,768 or greater`
 
-  $adt_comp\Event Log Service\System\Specify the maximum log file size (KB)
+###### $adt_comp\Event Log Service\System\Specify the maximum log file size (KB)
 
 - [ ] Set `Configure Windows SmartScreen` to `Enabled: Require approval from an administrator before running downloaded unknown software`
 
@@ -327,7 +324,7 @@ ________________________________________________________________________________
 
 - [ ] Set `Allow users to connect remotely by using Remote Desktop Services` to `Disabled`
 
-  $adt_comp\Remote Desktop Services\Remote Desktop Session Host\Connections\Allow users to connect remotely by using Remote Desktop Services
+###### $adt_comp\Remote Desktop Services\Remote Desktop Session Host\Connections\Allow users to connect remotely by using Remote Desktop Services
 
 - [ ] Set `Allow Cortana` to `Disabled`
 
@@ -373,11 +370,10 @@ ________________________________________________________________________________
 
   User Configuration\Policies\Administrative Templates\Windows Components\Windows Installer\Always install with elevated privileges
 
-Settings
-========
+## Settings
 
-System
-------
+### System
+
 Notification & actions
 - [ ] Show me tips about Windows to `Off`
 - [ ] Show notification on the lock to `Off`
@@ -386,31 +382,31 @@ Notification & actions
 Offline maps
 - [ ] Automatically update maps to `Off`
 
-Devices
--------
+### Devices
+
 Typing
 - [ ] Autocorrect misspelled words to `Off`
 
 AutoPlay
 - [ ] Use AutoPlay for all media and devices to `Off`
 
-Network & Internet
-------------------
+### Network & Internet
+
 Ethernet
 - [ ] Change Adapter Options -> Disable File and Printer Sharing for Microsoft Networks & Disable NetBIOS (Advanced TCP/IP Settings)
 
-Personalization
----------------
+### Personalization
+
 Start
 - [ ] Occasionally show suggestions in Start to `Off`
 
-Time & Language
----------------
+### Time & Language
+
 Region & language
 - [ ] Remove French
 
-Privacy
--------
+### Privacy
+
 General
 - [ ] Set everything to `Off` (except SmartScreen)
 
@@ -450,8 +446,8 @@ Feedback & diagnostics
 Background apps
 - [ ] Set everything to `Off`
 
-Update & Security
------------------
+### Update & Security
+
 Windows Update
 - [ ] Choose how updates are delivered to `Off`
 
@@ -459,12 +455,12 @@ Windows Defender
 - [ ] Cloud-based Protection to `Off`
 - [ ] Automatic sample submission to `Off`
 
-SMB v1
-------
+### SMB v1
+
 - [ ] Disable / Deinstall SMBv1
 
-Office Hardening
-----------------
+### Office Hardening
+
 - [ ] Set `Configure Attack surface reduction rules` to `Enabled`
 
   Windows components > Windows Defender Antivirus > Windows Defender Exploit Guard > Attack surface reduction
