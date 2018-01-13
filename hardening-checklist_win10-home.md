@@ -1,5 +1,7 @@
 # Windows 10 (Home) Hardening Checklist
 
+*All of these points are recommendations for private users, e.g. if you do not want to encrypt your partitions, no one forces you to enable Bit Locker for your private computer.*
+
 * [Disk Encryption](#disk-encryption)
 * [Antivirus](#antivirus)
 * [Group Policies](#group-policies)
@@ -17,8 +19,6 @@
   * [Update &amp; Security](#update--security)
   * [SMB v1](#smb-v1)
   * [Office Hardening](#office-hardening)
-
-*All of these points are recommendations for private users, e.g. if you do not want to encrypt your partitions, no one forces you to enable Bit Locker for your private computer.*
 
 The List may be not completly up to date and is not suitable for companies. If you search for a Enterprise Checklist, please check out [cisecurity.org](https://www.cisecurity.org/).
 
@@ -53,6 +53,7 @@ The List may be not completly up to date and is not suitable for companies. If y
   $winset\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after
 
 ### Local Policies
+###### $lp = $winset\Security Settings\Local Policies
 
 - [ ] **Audit Policy**
   - [ ] Audit account logon events: Failure
@@ -65,87 +66,91 @@ The List may be not completly up to date and is not suitable for companies. If y
   - [ ] Audit process tracking: No auditing
   - [ ] Audit system events: Success Failure
 
-###### $lp = $winset\Security Settings\Local Policies
+#### User Rights Assignment
+###### $lp\User Rights Assignment
 
 - [ ] Set `Access this computer from the network` to `Administrators` 
 
-  $lp\User Rights Assignment\Access this computer from the network
+  $lp_ura\Access this computer from the network
 
 - [ ] Set `Allow log on locally` to `Administrators, Users`
 
-  $lp\User Rights Assignment\Allow log on locally
+  $lp_ura\Allow log on locally
 
 - [ ] Set `Deny access to this computer from the network` to include `Guests, Local account`
 
-  $lp\User Rights Assignment\Deny access to this computer from the network
+  $lp_ura\Deny access to this computer from the network
 
 - [ ] Set `Deny log on as a batch job` to include `Guests`
 
-  $lp\User Rights Assignment\Deny log on as a batch job
+  $lp_ura\Deny log on as a batch job
 
 - [ ] Set `Deny log on as a service` to include `Guests`
 
-  $lp\User Rights Assignment\Deny log on as a service
+  $lp_ura\Deny log on as a service
 
 - [ ] Set `Deny log on through Remote Desktop Services` to include `Guests, Local account`
 
-  $lp\User Rights Assignment\Deny log on through Remote Desktop Services
+  $lp_ura\Deny log on through Remote Desktop Services
+
+#### Security Options
+###### $lp\Security Options
 
 - [ ] Set `Accounts: Block Microsoft accounts` to `Users can`t add or log on with Microsoft accounts`
 
-  $lp\Security Options\Accounts: Block Microsoft accounts
+  $lp_so\Accounts: Block Microsoft accounts
 
 - [ ] Set `Interactive logon: Do not display last user name` to `Enabled`
 
-  $lp\Security Options\Interactive logon: Do not display last user name
+  $lp_so\Interactive logon: Do not display last user name
 
 - [ ] Set `Interactive logon: Do not require CTRL+ALT+DEL` to `Disabled` 
 
-  $lp\Security Options\Interactive logon: Do not require CTRL+ALT+DEL
+  $lp_so\Interactive logon: Do not require CTRL+ALT+DEL
 
 - [ ]  Set `Microsoft network client: Digitally sign communications (always)` to `Enabled`
 
-  $lp\Security Options\Microsoft network client: Digitally sign communications (always)
+  $lp_so\Microsoft network client: Digitally sign communications (always)
 
 - [ ] Set `Microsoft network client: Digitally sign communications (if server agrees)` to `Enabled` 
 
-  $lp\Security Options\Microsoft network client: Digitally sign communications (if server agrees)
+  $lp_so\Microsoft network client: Digitally sign communications (if server agrees)
 
 - [ ] Set `Microsoft network server: Digitally sign communications (always)` to `Enabled`
 
-  $lp\Security Options\Microsoft network server: Digitally sign communications (always)
+  $lp_so\Microsoft network server: Digitally sign communications (always)
 
 - [ ] Set `Microsoft network server: Digitally sign communications (if client agrees)` to `Enabled`
 
-  $lp\Security Options\Microsoft network server: Digitally sign communications (if client agrees)
+  $lp_so\Microsoft network server: Digitally sign communications (if client agrees)
 
 - [ ] Set `Network access: Do not allow anonymous enumeration of SAM accounts and shares` to `Enabled`
 
-  $lp\Security Options\Network access: Do not allow anonymous enumeration of SAM accounts and shares
+  $lp_so\Network access: Do not allow anonymous enumeration of SAM accounts and shares
 
 - [ ] Set `Network access: Do not allow storage of passwords and credentials for network authentication` to `Enabled`
 
-  $lp\Security Options\Network access: Do not allow storage of passwords and credentials for network authentication
+  $lp_so\Network access: Do not allow storage of passwords and credentials for network authentication
 
 - [ ] Set `Network security: LAN Manager authentication level` to `Send NTLMv2 response only. Refuse LM & NTLM` 
 
-  $lp\Security Options\Network security: LAN Manager authentication level
+  $lp_so\Network security: LAN Manager authentication level
 
 - [ ] Set `Network security: Minimum session security for NTLM SSP based (including secure RPC) clients` to `Require NTLMv2 session security, Require 128-bit encryption`
 
-  $lp\Security Options\Network security: Minimum session security for NTLM SSP based (including secure RPC) clients
+  $lp_so\Network security: Minimum session security for NTLM SSP based (including secure RPC) clients
 
 - [ ] Set `Network security: Minimum session security for NTLM SSP based (including secure RPC) servers` to `Require NTLMv2 session security, Require 128-bit encryption`
 
-  $lp\Security Options\Network security: Minimum session security for NTLM SSP based (including secure RPC) servers
+  $lp_so\Network security: Minimum session security for NTLM SSP based (including secure RPC) servers
 
 - [ ] Set `Shutdown: Allow system to be shut down without having to log on` to disabled
 
-  $lp\Security Options\Shutdown: Allow system to be shut down without having to log on
+  $lp_so\Shutdown: Allow system to be shut down without having to log on
 
 - [ ] Set `User Account Control: Admin Approval Mode for the Built-in Administrator account` to `Enabled`
 
-  $lp\Security Options\User Account Control: Admin Approval Mode for the Built-in Administrator account
+  $lp_so\User Account Control: Admin Approval Mode for the Built-in Administrator account
 
 ### Windows Firewall With Advanced Security
 
@@ -161,12 +166,14 @@ The List may be not completly up to date and is not suitable for companies. If y
 
 ### Control Panel
 
+#### Administrative Templates
 ##### $adt=Computer Configuration\Policies\Administrative Templates
 
 - [ ] Set `Prevent enabling lock screen camera` to `Enabled`
 
   Computer $adt\Control Panel\Personalization\Prevent enabling lock screen camera
 
+##### System
 ###### $adt_sys=$adt\System\
 
 - [ ] Set `Turn off the Windows Messenger Customer Experience Improvement Program` to `Enabled`
@@ -237,6 +244,7 @@ The List may be not completly up to date and is not suitable for companies. If y
 
   $adt_sys\Windows Time Service\Time Providers\Enable Windows NTP Server
 
+##### Windows Components
 ###### $adt_comp=$adt\Windows Components\
 
 - [ ] Set `Allow a Windows app to share application data between users` to `Disabled`
