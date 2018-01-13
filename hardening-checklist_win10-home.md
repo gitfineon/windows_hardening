@@ -1,11 +1,13 @@
 # Windows 10 (Home) Hardening Checklist
 
-All of these points are recommendations, e.g. if you do not want to encrypt your partitions, no one forces you to enable Bit Locker for your private computer.
+*All of these points are recommendations for private users, e.g. if you do not want to encrypt your partitions, no one forces you to enable Bit Locker for your private computer.*
+
+The List may be not completly up to date and is not suitable for companies. If you search for a Enterprise Checklist, please check out [cisecurity.org](https://www.cisecurity.org/).
 
 ## Disk Encryption
 - [ ] Enable Bit Locker
 
-  *Disk encryption is recommended, especially for mobile devices*
+  *Disk encryption is recommended, especially for devices leaving the office*
 
 ## Antivirus
 - [ ] Enable Windows Defender
@@ -16,19 +18,21 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
 
 [CIS Microsoft Windows 10 Enterprise RTM (Release 1507) Benchmark](https://benchmarks.cisecurity.org/tools2/windows/CIS_Microsoft_Windows_10_Enterprise_RTM_Release_1507_Benchmark_v1.0.0.pdf)
 
+##### $winset = Computer Configuration\Policies\Windows Settings
+
 ### Account Policies
 
 - [ ] Set `Account lockout duration` to `15 or more minute(s)`
 
-  Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout duration
+  $winset\Security Settings\Account Policies\Account Lockout Policy\Account lockout duration
 
 - [ ] Set `Account lockout threshold` to `10 or fewer invalid logon attempt(s), but not 0
 
-  Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Account lockout threshold
+  $winset\Security Settings\Account Policies\Account Lockout Policy\Account lockout threshold
 
 - [ ] Set `Reset account lockout counter after` to `15 or more minute(s)
 
-  Computer Configuration\Policies\Windows Settings\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after
+  $winset\Security Settings\Account Policies\Account Lockout Policy\Reset account lockout counter after
 
 ### Local Policies
 
@@ -43,8 +47,7 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
   - [ ] Audit process tracking: No auditing
   - [ ] Audit system events: Success Failure
 
-
-###### $lp = Computer Configuration\Policies\Windows Settings\Security Settings\Local Policies\
+###### $lp = $winset\Security Settings\Local Policies
 
 - [ ] Set `Access this computer from the network` to `Administrators` 
 
@@ -128,21 +131,25 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
 
 ### Windows Firewall With Advanced Security
 
+###### $winfw=$winset\Security Settings\Windows Firewall with Advanced Security\Windows Firewall with Advanced Security
+
 - [ ] Set `Windows Firewall: Domain: Firewall state` to `On (recommended)`
 
-  Computer Configuration\Policies\Windows Settings\Security Settings\Windows Firewall with Advanced Security\Windows Firewall with Advanced Security\Windows Firewall Properties\*\Firewall state
+  $winfw\Windows Firewall Properties\*\Firewall state
 
 - [ ] Set `Windows Firewall: Domain: Inbound connections` to `Block (default)`
 
-  Computer Configuration\Policies\Windows Settings\Security Settings\Windows Firewall with Advanced Security\Windows Firewall with Advanced Security\Windows Firewall Properties\*\Inbound connections
+  $winfw\Windows Firewall Properties\*\Inbound connections
 
 ### Control Panel
 
+##### $adt=Computer Configuration\Policies\Administrative Templates
+
 - [ ] Set `Prevent enabling lock screen camera` to `Enabled`
 
-  Computer Configuration\Policies\Administrative Templates\Control Panel\Personalization\Prevent enabling lock screen camera
+  Computer $adt\Control Panel\Personalization\Prevent enabling lock screen camera
 
-###### $adt_sys=Computer Configuration\Policies\Administrative Templates\System\
+###### $adt_sys=$adt\System\
 
 - [ ] Set `Turn off the Windows Messenger Customer Experience Improvement Program` to `Enabled`
 
@@ -212,7 +219,7 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
 
   $adt_sys\Windows Time Service\Time Providers\Enable Windows NTP Server
 
-###### $adt_comp=Computer Configuration\Policies\Administrative Templates\Windows Components\
+###### $adt_comp=$adt\Windows Components\
 
 - [ ] Set `Allow a Windows app to share application data between users` to `Disabled`
 
@@ -296,7 +303,7 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
 
 - [ ] Set `System: Specify the maximum log file size (KB)` to `Enabled: 32,768 or greater`
 
-###### $adt_comp\Event Log Service\System\Specify the maximum log file size (KB)
+  $adt_comp\Event Log Service\System\Specify the maximum log file size (KB)
 
 - [ ] Set `Configure Windows SmartScreen` to `Enabled: Require approval from an administrator before running downloaded unknown software`
 
@@ -324,7 +331,7 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
 
 - [ ] Set `Allow users to connect remotely by using Remote Desktop Services` to `Disabled`
 
-###### $adt_comp\Remote Desktop Services\Remote Desktop Session Host\Connections\Allow users to connect remotely by using Remote Desktop Services
+  $adt_comp\Remote Desktop Services\Remote Desktop Session Host\Connections\Allow users to connect remotely by using Remote Desktop Services
 
 - [ ] Set `Allow Cortana` to `Disabled`
 
@@ -358,17 +365,19 @@ All of these points are recommendations, e.g. if you do not want to encrypt your
 
   $adt_comp\Windows Update\Configure Automatic Updates
 
+---
+
 - [ ] Set `Turn off toast notifications on the lock screen` to `Enabled`
 
-  User Configuration\Policies\Administrative Templates\Start Menu and Taskbar\Notifications\Turn off toast notifications on the lock screen
+  $adt\Start Menu and Taskbar\Notifications\Turn off toast notifications on the lock screen
 
 - [ ] Set `Turn off Help Experience Improvement Program` to `Enabled` 
 
-  User Configuration\Policies\Administrative Templates\System\Internet Communication Management\Internet Communication Settings\Turn off Help Experience Improvement Program
+  $adt_sys\Internet Communication Management\Internet Communication Settings\Turn off Help Experience Improvement Program
 
 - [ ] Set `Always install with elevated privileges` to `Disabled`
 
-  User Configuration\Policies\Administrative Templates\Windows Components\Windows Installer\Always install with elevated privileges
+  $adt_comp\Windows Installer\Always install with elevated privileges
 
 ## Settings
 
