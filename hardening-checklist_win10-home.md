@@ -1,5 +1,24 @@
 # Windows 10 (Home) Hardening Checklist
 
+   * [Windows 10 (Home) Hardening Checklist](#windows-10-home-hardening-checklist)
+      * [Disk Encryption](#disk-encryption)
+      * [Antivirus](#antivirus)
+      * [Group Policies](#group-policies)
+         * [Account Policies](#account-policies)
+         * [Local Policies](#local-policies)
+         * [Windows Firewall With Advanced Security](#windows-firewall-with-advanced-security)
+         * [Control Panel](#control-panel)
+      * [Settings](#settings)
+         * [System](#system)
+         * [Devices](#devices)
+         * [Network &amp; Internet](#network--internet)
+         * [Personalization](#personalization)
+         * [Time &amp; Language](#time--language)
+         * [Privacy](#privacy)
+         * [Update &amp; Security](#update--security)
+         * [SMB v1](#smb-v1)
+         * [Office Hardening](#office-hardening)
+
 *All of these points are recommendations for private users, e.g. if you do not want to encrypt your partitions, no one forces you to enable Bit Locker for your private computer.*
 
 The List may be not completly up to date and is not suitable for companies. If you search for a Enterprise Checklist, please check out [cisecurity.org](https://www.cisecurity.org/).
@@ -209,7 +228,7 @@ The List may be not completly up to date and is not suitable for companies. If y
 
 - [ ] Set `Enable/Disable PerfTrack` to `Disabled`
 
-###### $adt_sys\Troubleshooting and Diagnostics\Windows Performance PerfTrack\Enable/Disable PerfTrack
+  $adt_sys\Troubleshooting and Diagnostics\Windows Performance PerfTrack\Enable/Disable PerfTrack
 
 - [ ] Set `Enable Windows NTP Client` to `Enabled` 
 
