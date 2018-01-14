@@ -1,5 +1,6 @@
 # Windows Client Hardening
 
+Primarily intended as advisory for home user. No guarantee for completeness.
 ## Currently only for Win10 (1507 and later)
 
 forked from [0x6d69636b/windows_hardening](https://github.com/0x6d69636b/windows_hardening) //
@@ -12,6 +13,13 @@ There are already newer releases of this Benchmark
 * CIS Microsoft Windows 10 Enterprise Release 1607 Benchmark v1.2.0
 * CIS Microsoft Windows 10 Enterprise Release 1511 Benchmark v1.1.1
 
+There are advisories for MS Office, Docker and VMware, too.
+You may be also interessted in documents for other operating systems, browsers and server software
+
 Register here: https://www.cisecurity.org/cis-benchmarks/
 
 Downloads (same Browser): https://downloads.cisecurity.org/#/all
+
+## Similar checklists
+
+http://hardenwindows10forsecurity.com/index.html
